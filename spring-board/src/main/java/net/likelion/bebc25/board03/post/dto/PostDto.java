@@ -1,4 +1,4 @@
-package net.likelion.bebc25.board02.post.dto;
+package net.likelion.bebc25.board03.post.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -20,9 +20,6 @@ public class PostDto {
     @Size(min = 2, max = 10, message = "작성자 이름은 2자 이상 10자 이하여야 합니다.")
     private String author;
 
-//    private String title;
-//    private String content;
-//    private String author;
     private boolean secret;
     private LocalDateTime createdAt;
 

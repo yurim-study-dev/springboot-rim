@@ -1,11 +1,14 @@
 package net.likelion.bebc25.board02.post.controller;
 
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import net.likelion.bebc25.board02.post.dto.PostDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.naming.Binding;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,15 +71,13 @@ public class BoardController {
 
     // 지정한 id의 게시글을 반환한다.
     public PostDto getPost(int id){
-        PostDto targetPost = null;
         List<PostDto> posts = getPosts();
         for(PostDto org : posts){
             if(org.getId() == id){
-                targetPost = org;
-                break;
+           return org;
             }
         }
-        return targetPost;
+       throw new IllegalArgumentException(id + "번 게시글은 존재하지 않습니다.");
     }
 
     // 게시글 등록 화면을 요청하는 컨트롤러
@@ -97,8 +98,12 @@ public class BoardController {
 
     // 게시글 등록 요청을 처리하는 컨트롤러
     @PostMapping("/write")
-    public String writePost(@ModelAttribute PostDto post){
+    public String writePost  (@Valid @ModelAttribute("postForm") PostDto post,  // Vaildation 검증 대상 객체
+                              BindingResult bindingResult){ // Vaildation 검증 결과 저장 객체(대상 객체 뒤에 기술해야 함)
         log.debug(post.toString());
+        if(bindingResult.hasErrors()){ // 검증에 실패 했을 경우
+            return "board/write"; // 작성중이던 페이지로 다시 보낸다.
+        }
 
         savePost(post);
 
@@ -115,8 +120,12 @@ public class BoardController {
 
     // 게시글 수정 요청을 처리하는 컨트롤러
     @PostMapping("/edit")
-    public String editPost(@ModelAttribute PostDto post){
+    public String editPost(@Valid @ModelAttribute("boardForm") PostDto post,BindingResult bindingResult){
         log.debug(post.toString());
+
+        if(bindingResult.hasErrors()){
+            return"board/write";
+        }
         updatePost(post);
         return "redirect:detail.html?id=" + post.getId();
     }

@@ -8,11 +8,13 @@
 </head>
 <body>
 <div class="container">
-  <h1>게시글 목록</h1>
-  <div class="nav">
-    <a href="list.html">목록으로</a>
-    <a href="write.html">새 글 쓰기</a>
-  </div>
+  <th:block  th:insert="~{layout/common :: nav-header('게시글 목록')}">
+    <h1>게시글 상세 정보</h1>
+    <div class="nav" >
+      <a href="list.html">목록으로</a>
+      <a href="write.html">새 글 쓰기</a>
+    </div>
+  </th:block>
 
   <table>
     <thead>
