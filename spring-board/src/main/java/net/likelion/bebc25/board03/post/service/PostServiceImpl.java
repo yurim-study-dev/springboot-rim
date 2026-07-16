@@ -13,7 +13,7 @@ public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
 
-    public PostServiceImpl(@Qualifier("pureJdbcPostRepository") PostRepository postRepository){
+    public PostServiceImpl(@Qualifier("jdbcTemplatePostRepository") PostRepository postRepository){
         this.postRepository = postRepository;
     }
 
