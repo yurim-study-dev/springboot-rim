@@ -21,16 +21,28 @@ repositories {
 }
 
 dependencies {
+    // [추가] JDBC 지원 — JdbcTemplate, DataSource 등 DB 연결 도구 제공 (board03에서 사용)
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 
+    // [기본] Thymeleaf 템플릿 엔진 — HTML에서 th:text, th:each 등 사용 가능하게 해줌
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+    // [추가] Validation — @NotBlank, @Size 등 유효성 검사 어노테이션 사용 가능하게 해줌
     implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // [기본] Spring MVC — @Controller, @GetMapping, @PostMapping 등 웹 요청 처리 기능 제공
     implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+
+    // [기본] DevTools — 코드 수정 시 서버 자동 재시작, 개발 편의 도구 (배포 시에는 빠짐)
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    // [기본] 테스트용 의존성 — 테스트 코드 작성할 때 사용
     testImplementation 'org.springframework.boot:spring-boot-starter-thymeleaf-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-validation-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    // [추가] MySQL 드라이버 — Java에서 MySQL DB에 접속할 수 있게 해주는 드라이버
     runtimeOnly 'com.mysql:mysql-connector-j'
 }
 

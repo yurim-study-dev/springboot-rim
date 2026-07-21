@@ -1,9 +1,9 @@
-package net.likelion.bebc25.board03.post.controller;
+package net.likelion.bebc25.homework.post.controller;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import net.likelion.bebc25.board03.post.dto.PostDto;
-import net.likelion.bebc25.board03.post.service.PostService;
+import net.likelion.bebc25.homework.post.dto.PostDto;
+import net.likelion.bebc25.homework.post.service.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,22 +13,13 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-
-// 브라우저 요청을 받아서 처리하고, 결과를 HTML 템플릿으로 반환하는 역할
 @Controller
-
-// log.debug(), log.info() 같은 로그 기능을 사용할 수 있게 해주는 어노테이션 (Lombok)
 @Slf4j
-
-// 이 컨트롤러의 모든 URL 앞에 /03/board 를 붙여줌
-@RequestMapping("/03/board")
+@RequestMapping("/homework/board")
 public class BoardController {
 
-    // PostService 를 사용하겠다고 선언 (인터페이스 타입으로 받음), final : 한 번 주입되면 바꿀 수 없음
     private final PostService postService;
 
-    // 생성자 주입 : 스프링이 자동으로 PostServiceImpl 을 찾아서 넣어줌
-    // → 직접 new PostServiceImpl() 할 필요 없음
     public BoardController(PostService postService){
         this.postService = postService;
     }
@@ -36,11 +27,10 @@ public class BoardController {
     // 게시글 목록 조회하는 컨트롤러
     @GetMapping("/list.html")
     public String getBoardList(Model model){
-
-        List<PostDto> posts = postService.getPosts(); // Service → Repository → DB 에서 게시글 목록 가져오기
-        model.addAttribute("posts", posts); // "posts" 이름으로 list.html 에 전달 → ${posts} 로 사용
-
-        return "board/list"; // templates/board/list.html 반환
+        // 게시글 목록 조회(데이터)
+        List<PostDto> posts = postService.getPosts();
+        model.addAttribute("posts", posts);
+        return "board/list";
     }
 
     // 게시글 상세 조회하는 컨트롤러

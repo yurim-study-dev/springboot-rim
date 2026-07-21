@@ -1,4 +1,4 @@
-package net.likelion.bebc25.board03.post.dto;
+package net.likelion.bebc25.homework.post.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -8,11 +8,10 @@ import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Getter
 @Setter
 @ToString
-
+@Builder
 // 게시글 하나를 저장할 객체
 public class PostDto {
     private int id;
